@@ -1,3 +1,10 @@
+//
+//  1.asm
+//  asm-examples
+//
+//  Created by Damian Rzeszot on 06/12/2017.
+//  Copyright © 2017 Damian Rzeszot. All rights reserved.
+//
 
 t0_const		equ 65535 - 921
 
