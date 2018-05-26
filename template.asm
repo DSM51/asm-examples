@@ -1,15 +1,4 @@
 
-
-
-
-
-pin_beep            equ P1.5
-pin_segment         equ P1.6
-pin_diode           equ P1.7
-
-pin_keyboard        equ P3.5
-
-
 ;
 ;
 ;
@@ -81,8 +70,8 @@ segment_convert:
         movc A, @PC+A           ; pobierz kod odpowiadający cyfrze
         ret                     ; koniec
 
-; kody znaków dla wyświetlacza 7-segmentowego
-; zobacz: https://dsm51.github.io/calc-7segment/
+                                ; kody znaków dla wyświetlacza 7-segmentowego
+                                ; zobacz: https://dsm51.github.io/calc-7segment/
         db 0b00111111           ; 0
         db 0b00000110           ; 1
         db 0b01011011           ; 2
@@ -99,6 +88,74 @@ segment_convert:
         db 0b01011110           ; d
         db 0b01111001           ; E
         db 0b01110001           ; F
+
+
+
+
+;
+;
+;
+
+pin_watchdog        equ P1.4
+pin_buzzer          equ P1.5
+pin_segment         equ P1.6
+pin_diode           equ P1.7
+
+; klawiatura sekwencyjna
+pin_keyboard        equ P3.5
+
+
+
+
+
+;
+;    Adresy układów dołączonych do szyny mikroprocesora
+;
+
+
+; sterownik przerwań
+CSIC                equ 0xff00
+; przetwornik C/A
+CSDA                equ 0xff08
+; przetwornik A/C
+CSAD                equ 0xff10
+; multiplekser analogowy
+CSMX                equ 0xff18
+
+; klawiatura matrycowa (klawisze 0..7)
+CSKB0               equ 0xff21
+; klawiatura matrycowa (klawisze 8..F)
+CSKB1               equ 0xff22
+
+
+; port równoległy (8255) - rejestr portu A
+CS55A               equ 0xff28
+; port równoległy (8255) - rejestr portu B
+CS55B               equ 0xff29
+; port równoległy (8255) - rejestr portu C
+CS55C               equ 0xff2a
+; port równoległy (8255) - rejestr portu D
+CS55D               equ 0xff2b
+
+; bufor wyboru wskaźnika 7-segmentowego
+CSDS                equ 0xff30
+; bufor danych wskaźnika 7-segmentowego
+CSDB                equ 0xff38
+
+; tryb dekodera adresów
+CSMOD               equ 0xff40
+
+; wyświetlacz LCD (HD44780) – wpis rozkazów
+LCDWC               equ 0xff80
+; wyświetlacz LCD (HD44780) – wpis danych
+LCDWD               equ 0xff81
+; wyświetlacz LCD (HD44780) – odczyt stanu
+LCDRC               equ 0xff82
+; wyświetlacz LCD (HD44780) – odczyt danych
+LCDRD               equ 0xff83
+
+; zewnętrzna magistrala systemowa
+CSX                 equ 0xffc0
 
 
 
